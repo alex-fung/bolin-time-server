@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.restful import reqparse, Api, Resource
+import os
 
 app = Flask(__name__)
 api = Api(app)
