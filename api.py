@@ -15,7 +15,7 @@ from models import *
 def test():
 	res = json.loads(request.data)
 	linkID = res['id']
-	lFile = LinkFile(videoID = linkID, audioFile = None)
+	lFile = LinkFile(videoId = linkID, audioFile = None)
 	db.session.add(lFile)
 	db.session.commit()
 
