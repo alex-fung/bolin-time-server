@@ -31,6 +31,10 @@ def test():
 	db.session.add(lFile)
 	db.session.commit()
 
+	for file in os.listdir(os.path.dirname(os.path.abspath(__file__))):
+		if file.endswith(".mp3"):
+			os.remove(file)	
+
 	return jsonify(**{'id': linkID})
 
 if __name__=='__main__':
