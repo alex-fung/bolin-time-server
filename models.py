@@ -1,5 +1,4 @@
 from api import db
-from sqlalchemy.dialects.postgresql import JSON
 
 class LinkFile(db.Model):
 	__tablename__ = 'linkfiles'

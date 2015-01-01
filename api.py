@@ -2,6 +2,7 @@ import json
 
 from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy.orm import sessionmaker
 import os
 
 app = Flask(__name__)
@@ -13,7 +14,12 @@ from models import *
 @app.route('/', methods=['POST'])
 def test():
 	res = json.loads(request.data)
-	return jsonify(**{'id': res['id']})
+	linkID = res['id']
+	lFile = LinkFile(videoID = linkID, audioFile = None)
+	db.session.add(lFile)
+	db.session.commit()
+
+	return jsonify(**{'id': linkID})
 
 if __name__=='__main__':
 	port = int(os.environ.get('PORT', 5000))
