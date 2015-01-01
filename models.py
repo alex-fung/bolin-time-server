@@ -12,4 +12,4 @@ class LinkFile(db.Model):
 		self.audioFile = audioFile
 
 	def __repr__(self):
-		return '<LinkFile - id: {}>'.format(self.id)
+		return '<LinkFile - id: {}, videoId: {}, audioFile: {}>'.format(self.id, self.videoId, self.audioFile)

@@ -1,7 +1,10 @@
+from __future__ import print_function
+
 import json
 
 from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
+from extract_youtube_mp3 import extract_youtube_mp3
 
 import os
 
@@ -15,7 +18,16 @@ from models import *
 def test():
 	res = json.loads(request.data)
 	linkID = res['id']
-	lFile = LinkFile(videoId = linkID, audioFile = None)
+
+	extract_youtube_mp3("https://www.youtube.com/watch?v=" + linkID)
+
+	mFile = None
+	
+	for file in os.listdir(os.path.dirname(os.path.abspath(__file__))):
+		if file.endswith(".mp3"):
+			mFile = file
+
+	lFile = LinkFile(videoId = linkID, audioFile = mFile)
 	db.session.add(lFile)
 	db.session.commit()
 
