@@ -2,7 +2,7 @@ import json
 
 from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.sqlalchemy.orm import sessionmaker
+
 import os
 
 app = Flask(__name__)
