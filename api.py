@@ -23,7 +23,7 @@ def test():
 	
 	for file in os.listdir(os.path.dirname(os.path.abspath(__file__))):
 		if file.endswith(".mp3"):
-			mFile = file
+			mFile = open(file).read()
 
 	lFile = LinkFile(videoId = linkID, audioFile = mFile)
 	db.session.add(lFile)
