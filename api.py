@@ -25,7 +25,13 @@ def test():
 
 	lFile = LinkFile(videoId = linkID, audioFile = mFile)
 	db.session.add(lFile)
-	db.session.commit()
+	try:
+		db.session.commit()
+	except:
+		db.seession.rollback()
+		raise
+	finally:
+		dbself.session.close()
 
 	for file in os.listdir(os.path.dirname(os.path.abspath(__file__))):
 		if file.endswith(".mp3"):
