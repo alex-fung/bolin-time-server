@@ -1,6 +1,8 @@
 import json
+import random
+import io
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 from flask.ext.sqlalchemy import SQLAlchemy
 from extract_youtube_mp3 import extract_youtube_mp3
 
@@ -34,6 +36,17 @@ def test():
 			os.remove(file)	
 
 	return jsonify(**{'id': linkID})
+
+
+@app.route('/music/<int:get_id>', methods=['GET'])
+def getMusic(get_id):
+	return send_file(io.BytesIO(LinkFile.query.get(get_id).audioFile), attachment_filename=str(get_id) + ".mp3", as_attachment=True)
+
+@app.route('/music/random', methods=['GET'])
+def getRandomMusic():
+	allLinkFiles = LinkFile.query.all()
+	randomInt = random.randint(0, len(allLinkFiles) - 1)
+	return send_file(io.BytesIO(allLinkFiles[randomInt].audioFile), attachment_filename="random.mp3", as_attachment=True)
 
 if __name__=='__main__':
 	port = int(os.environ.get('PORT', 5000))
