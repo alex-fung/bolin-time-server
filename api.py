@@ -1,12 +1,11 @@
 import json
 import random
 import io
+import os
 
 from flask import Flask, jsonify, request, send_file
 from flask.ext.sqlalchemy import SQLAlchemy
 from extract_youtube_mp3 import extract_youtube_mp3
-
-import os
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
