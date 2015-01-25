@@ -28,10 +28,10 @@ def test():
 	try:
 		db.session.commit()
 	except:
-		db.seession.rollback()
+		db.session.rollback()
 		raise
 	finally:
-		dbself.session.close()
+		db.session.close()
 
 	for file in os.listdir(os.path.dirname(os.path.abspath(__file__))):
 		if file.endswith(".mp3"):
