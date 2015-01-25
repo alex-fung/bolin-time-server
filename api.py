@@ -46,9 +46,10 @@ def getMusic(get_id):
 
 @app.route('/music/random', methods=['GET'])
 def getRandomMusic():
-	allLinkFiles = LinkFile.query.all()
-	randomInt = random.randint(0, len(allLinkFiles) - 1)
-	return send_file(io.BytesIO(allLinkFiles[randomInt].audioFile), attachment_filename="random.mp3", as_attachment=True)
+	allLinkFileIds = LinkFile.query.with_entities(LinkFile.id).all()
+	randomInt = random.randint(0, len(allLinkFileIds) - 1)
+	musicId = allLinkFileIds[randomInt][0]
+	return send_file(io.BytesIO(LinkFile.query.get(musicId)), attachment_filename="random.mp3", as_attachment=True)
 
 if __name__=='__main__':
 	port = int(os.environ.get('PORT', 5000))
