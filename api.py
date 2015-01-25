@@ -1,7 +1,4 @@
-import json
-import random
-import io
-import os
+import json, random, io, os
 
 from flask import Flask, jsonify, request, send_file
 from flask.ext.sqlalchemy import SQLAlchemy
